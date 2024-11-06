@@ -43,7 +43,7 @@ sleep 60
 # MySQL credentials
 DB_USER="root"
 DB_PASSWORD="your_password" # Replace with your MySQL root password
-DB_NAME="db_name"
+DB_NAME="music_store"
 
 # Connect to MySQL and create the database and table if they don't exist
 echo "Creating database and table..."
@@ -61,7 +61,6 @@ CREATE TABLE IF NOT EXISTS guitars (
 );
 EOF
 
-# make mock data
 # Arrays for brands, types, and colors
 brands=("Fender" "Gibson" "Jackson" "Ibanez" "Yamaha" "PRS" "ESP" "Charvel" "Epiphone" "Schecter")
 types=("Stratocaster" "LesPaul" "Dinky" "RG" "Pacifica" "Custom24" "LTD" "ProMod" "SG" "Omen")

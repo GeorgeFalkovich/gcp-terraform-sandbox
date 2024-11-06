@@ -29,7 +29,7 @@ sudo mysql_secure_installation <<EOF
 y # Enable VALIDATE PASSWORD PLUGIN (choose "y" for Yes or "n" for No)
 2 # Set password validation level (0 = Low, 1 = Medium, 2 = Strong)
 root # Replace with your MySQL root password
-fake_password # Confirm the MySQL root password
+root # Confirm the MySQL root password
 y # Remove anonymous users
 y # Disallow root login remotely
 y # Remove test database and access to it
@@ -41,8 +41,8 @@ echo "MySQL installation and initial setup are complete."
 # Add MySQL admin user with all privileges
 echo "Creating MySQL admin user and granting privileges..."
 sudo mysql -u root <<MYSQL_SCRIPT
-CREATE USER 'fake_user'@'%' IDENTIFIED BY 'fake_password';
-GRANT ALL PRIVILEGES ON *.* TO 'fake_user'@'%' WITH GRANT OPTION;
+CREATE USER 'admin_user'@'%' IDENTIFIED BY 'admin_password';
+GRANT ALL PRIVILEGES ON *.* TO 'admin_user'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 MYSQL_SCRIPT
 

@@ -1,2 +1,4 @@
 creds
 .terraform
+# startup/jenkins-agent-install.sh
+.terraform.lock.hcl

@@ -36,11 +36,10 @@ sudo systemctl enable mysql
 echo "Running MySQL secure installation..."
 sudo mysql_secure_installation <<EOF
 
-# replace true password
 y # Enable VALIDATE PASSWORD PLUGIN (choose "y" for Yes or "n" for No)
 2 # Set password validation level (0 = Low, 1 = Medium, 2 = Strong)
 root # Replace with your MySQL root password
-fake_password # Confirm the MySQL root password
+root # Confirm the MySQL root password
 y # Remove anonymous users
 y # Disallow root login remotely
 y # Remove test database and access to it
@@ -50,11 +49,10 @@ EOF
 echo "MySQL installation and initial setup are complete."
 
 # Add MySQL admin user with all privileges
-# replace with real password
 echo "Creating MySQL admin user and granting privileges..."
 sudo mysql -u root <<MYSQL_SCRIPT
-CREATE USER 'fake_user'@'%' IDENTIFIED BY 'fake_password';
-GRANT ALL PRIVILEGES ON *.* TO 'fake_user'@'%' WITH GRANT OPTION;
+CREATE USER 'admin_user'@'%' IDENTIFIED BY 'admin_password';
+GRANT ALL PRIVILEGES ON *.* TO 'admin_user'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 MYSQL_SCRIPT
 
@@ -85,9 +83,8 @@ sudo rm /var/www/html/index.html
 sudo sed -i 's/^bind-address[[:space:]]*=[[:space:]]*127\.0\.0\.1/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo systemctl restart mysql
 
-# replace xxx with true jenkins url and secret
-sudo curl -sO http://fake:8080/jnlpJars/agent.jar
-sudo java -jar agent.jar -url http://fake:8080/ -secret fake -name "agent-1" -webSocket -workDir "/jenkins-agent/"
+sudo curl -sO http://jenkins.george-falkovich.com:8080/jnlpJars/agent.jar
+sudo java -jar agent.jar -url http://jenkins.george-falkovich.com:8080/ -secret bb2c79d3666efcee39dd23b7baa3523f41868ba52a64fecab8f6ab06ede9305a -name "agent-1" -webSocket -workDir "/jenkins-agent/"
 
 # Confirm installation
 echo "Installation complete. Verifying versions..."
