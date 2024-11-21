@@ -16,5 +16,11 @@ resource "google_project_iam_member" "ar-admin" {
   role    = "roles/artifactregistry.admin"
 }
 
+resource "google_project_iam_member" "gke-sa-editor" {
+  project = var.gcp_project
+  member  = "serviceAccount:${google_service_account.gke-sa.email}"
+  role    = "roles/editor"
+}
+
 
 

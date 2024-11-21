@@ -5,8 +5,8 @@ data "google_compute_address" "jenkins_ip" {
 }
 
 data "google_compute_address" "jenkins_agent_ip" {
-  name = "jenkins-agent-static-ip"
-  depends_on = [ google_compute_address.jenkins_agent_ip ]
+  name       = "jenkins-agent-static-ip"
+  depends_on = [google_compute_address.jenkins_agent_ip]
 }
 
 

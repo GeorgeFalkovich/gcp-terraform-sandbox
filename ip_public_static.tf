@@ -21,11 +21,11 @@ resource "google_compute_address" "jenkins_agent_ip" {
   region       = var.region_default
 }
 
-resource "google_compute_address" "mysql_v1_ip" {
-  name         = "mysql-v1-static-ip"
-  address_type = "EXTERNAL"
-  region       = var.region_default
-}
+# resource "google_compute_address" "mysql_v1_ip" {
+#   name         = "mysql-v1-static-ip"
+#   address_type = "EXTERNAL"
+#   region       = var.region_default
+# }
 
 resource "google_compute_address" "portfolio_site_ip" {
   name         = "portfolio-static-ip"

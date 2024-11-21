@@ -18,10 +18,7 @@ resource "google_container_cluster" "primary" {
     enable_components = ["WORKLOADS", "APISERVER", "SYSTEM_COMPONENTS"]
   }
 
-
-
 }
-
 
 resource "google_container_node_pool" "primary_node_pool" {
   name       = "my-node-pool"
@@ -38,7 +35,7 @@ resource "google_container_node_pool" "primary_node_pool" {
 
   node_config {
     preemptible  = false
-    machine_type = "e2-medium"
+    machine_type = "n1-standard-1"
     disk_size_gb = "100"
 
 

@@ -9,7 +9,7 @@ resource "null_resource" "copy_and_unzip_portfolio" {
 
   triggers = {
     # file_md5 = filemd5("startup/portfolio.zip")
-    zone     = var.zone_default
+    zone = var.zone_default
   }
 
   depends_on = [module.portfolio]

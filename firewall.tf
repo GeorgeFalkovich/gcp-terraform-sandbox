@@ -15,7 +15,7 @@ resource "google_compute_firewall" "mysql-allow" {
   }
 
   source_ranges = ["10.0.0.0/8", "147.235.214.165"]
-  target_tags = ["jenkins-agent"]
+  target_tags   = ["jenkins-agent"]
 }
 
 resource "google_compute_firewall" "jenkins-allow" {
