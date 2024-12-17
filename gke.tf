@@ -24,11 +24,11 @@ resource "google_container_node_pool" "primary_node_pool" {
   name       = "my-node-pool"
   location   = var.zone_default
   cluster    = google_container_cluster.primary.name
-  node_count = 2
+  node_count = 3
 
 
   autoscaling {
-    min_node_count = 2
+    min_node_count = 3
     max_node_count = 5
   }
 
@@ -49,7 +49,7 @@ resource "google_container_node_pool" "primary_node_pool" {
     tags = ["tag1", "tag2", "bar"]
 
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    service_account = google_service_account.gke-sa.email
+    # service_account = google_service_account.gke-sa.email
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]

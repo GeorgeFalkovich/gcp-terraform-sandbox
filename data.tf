@@ -10,9 +10,9 @@ data "google_compute_address" "jenkins_agent_ip" {
 }
 
 
-data "google_compute_global_address" "lb-ip" {
-  name = "lb-ip"
-}
+# data "google_compute_global_address" "lb-ip" {
+#   name = "lb-ip"
+# }
 
 data "google_compute_address" "portfolio-ip" {
   name = "portfolio-static-ip"

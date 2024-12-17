@@ -1,6 +1,6 @@
 module "siege" {
   source           = "./modules/vm"
-  instance_name    = "siege"
+  instance_name    = "siege-vegeta"
   vpc_name         = var.vpc_default
   subnet_name      = var.vpc_subnet_default
   zone             = var.zone_default

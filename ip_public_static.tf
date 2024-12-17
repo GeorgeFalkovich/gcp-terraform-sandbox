@@ -3,10 +3,10 @@ resource "google_compute_global_address" "external_ip" {
   address_type = "EXTERNAL"
 }
 
-resource "google_compute_global_address" "lb_ip" {
-  name         = "lb-ip"
-  address_type = "EXTERNAL"
-}
+# resource "google_compute_global_address" "lb_ip" {
+#   name         = "lb-ip"
+#   address_type = "EXTERNAL"
+# }
 
 resource "google_compute_address" "jenkins_ip" {
   name         = "jenkins-static-ip"
