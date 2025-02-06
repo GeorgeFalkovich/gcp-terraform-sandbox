@@ -5,13 +5,20 @@ resource "google_container_cluster" "primary" {
   # We can't create a cluster with no node pool defined, but we want to only use
   # separately managed node pools. So we create the smallest possible default
   # node pool and immediately delete it.
-  remove_default_node_pool = true
-  initial_node_count       = 1
+  remove_default_node_pool = false
+  initial_node_count       = 3
   deletion_protection      = false
+
+  node_config {
+    labels = {pool = "default"}
+    tags = [ "default-tag" ]
+  }
+
 
   workload_identity_config {
     workload_pool = "${data.google_client_config.current.project}.svc.id.goog"
   }
+
 
   enable_shielded_nodes = false
   logging_config {
@@ -20,8 +27,8 @@ resource "google_container_cluster" "primary" {
 
 }
 
-resource "google_container_node_pool" "primary_node_pool" {
-  name       = "my-node-pool"
+resource "google_container_node_pool" "alpha_pool" {
+  name       = "alpha-pool"
   location   = var.zone_default
   cluster    = google_container_cluster.primary.name
   node_count = 3
@@ -44,9 +51,9 @@ resource "google_container_node_pool" "primary_node_pool" {
     }
 
     labels = {
-      label_name = "label"
+      pool = "alpha"
     }
-    tags = ["tag1", "tag2", "bar"]
+    tags = ["alpha-tag"]
 
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     # service_account = google_service_account.gke-sa.email
