@@ -15,6 +15,9 @@ resource "google_compute_instance" "module-vm" {
     }
     source = var.disk_source
   }
+  metadata_startup_script = var.start_up_script
+  tags                    = var.tags
+  labels                  = var.labels
 
   network_interface {
     network    = var.vpc_name
@@ -29,8 +32,6 @@ resource "google_compute_instance" "module-vm" {
     }
   }
 
-  metadata_startup_script = var.start_up_script
-  tags                    = var.tags
-  labels                  = var.labels
+
 }
 
