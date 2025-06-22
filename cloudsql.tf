@@ -20,9 +20,3 @@ module "cloudsql" {
   peering_range_name    = "default-ip-range"
   peering_prefix_length = 24
 }
-
-
-cloud-sql-proxy \
-
-  --credentials-file=./creds/key.json \
-  georgef-sandbox:us-central1:sql-instance
