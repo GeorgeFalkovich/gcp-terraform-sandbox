@@ -1,22 +1,13 @@
-resource "google_compute_router" "router" {
-  name    = "my-router"
-  region  = var.region_default
-  network = var.vpc_default
-
-  bgp {
-    asn = 64514
-  }
-}
-
-resource "google_compute_router_nat" "nat" {
-  name                               = "my-router-nat"
-  router                             = google_compute_router.router.name
-  region                             = google_compute_router.router.region
-  nat_ip_allocate_option             = "AUTO_ONLY"
-  source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
-
-  log_config {
-    enable = true
-    filter = "ERRORS_ONLY"
-  }
-}
+# module "cloud_nat" {
+#   source                             = "./modules/cloud-nat"
+#   vpc_name                           = var.vpc_name
+#   log_filter                         = var.nat_log_filter
+#   router_name                        = var.router_name
+#   log_enable                         = var.nat_log_enable
+#   region                             = var.region
+#   nat_name                           = var.nat_name
+#   network                            = var.network_name
+#   nat_ip_allocate_option             = var.nat_ip_allocate_option
+#   asn                                = var.nat_asn
+#   source_subnetwork_ip_ranges_to_nat = var.nat_source_subnetwork_ip_ranges
+# }
