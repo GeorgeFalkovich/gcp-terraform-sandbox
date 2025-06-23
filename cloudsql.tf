@@ -6,7 +6,7 @@ module "cloudsql" {
   deletion_protection = false
   tier                = "db-f1-micro"
   backup_enabled      = false
-  ipv4_enabled        = false
+  ipv4_enabled        = true
   private_network     = var.full_vpc_name
   enable_private_path = true
   db_name             = "exampledb"
