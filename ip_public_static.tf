@@ -1,4 +1,4 @@
-resource "google_compute_global_address" "external_ip" {
+resource "google_compute_global_address" "ingress_ip" {
   name         = "gke-ingress-ip"
   address_type = "EXTERNAL"
 }

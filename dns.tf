@@ -1,11 +1,11 @@
-# resource "google_dns_record_set" "lb-a" {
-#   name         = "lb.george-falkovich.com."
-#   managed_zone = "george-falkovich"
-#   type         = "A"
-#   ttl          = 300
-#   # rrdatas      = [data.google_compute_global_address.lb-ip.address]
-#   depends_on   = [google_compute_global_address.lb_ip]
-# }
+resource "google_dns_record_set" "ingress-a" {
+  name         = "groceries.george-falkovich.com."
+  managed_zone = "george-falkovich"
+  type         = "A"
+  ttl          = 300
+  rrdatas      = [google_compute_global_address.ingress_ip.address]
+  depends_on   = [google_compute_global_address.ingress_ip]
+}
 
 # resource "google_dns_record_set" "jenkins-a" {
 #   name         = "jenkins.george-falkovich.com."
