@@ -3,6 +3,7 @@ resource "google_compute_instance" "module-vm" {
   machine_type              = var.instance_type
   zone                      = var.zone
   allow_stopping_for_update = true
+  desired_status            = var.desired_status
 
   boot_disk {
     dynamic "initialize_params" {
@@ -15,6 +16,11 @@ resource "google_compute_instance" "module-vm" {
     }
     source = var.disk_source
   }
+  
+  metadata = {
+    serial-port-enable = var.enable_serial_port ? "TRUE" : "FALSE"
+  }
+  
   metadata_startup_script = var.start_up_script
   tags                    = var.tags
   labels                  = var.labels
@@ -31,7 +37,6 @@ resource "google_compute_instance" "module-vm" {
       }
     }
   }
-
 
 }
 

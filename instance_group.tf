@@ -1,7 +1,7 @@
 # resource "google_compute_instance_group_manager" "show_details_mig" {
 #   name               = "show-details-mig-tf"
 #   base_instance_name = "show-details-add"
-#   zone               = var.zone_default
+#   zone               = var.zone
 #   version {
 #     # instance_template = google_compute_instance_template.worker-template.self_link_unique
 #     instance_template = google_compute_instance_template.show-details-template.self_link_unique
@@ -32,12 +32,12 @@
 
 # resource "google_compute_autoscaler" "show_details_mig" {
 #   name   = "show-details-mig-autoscaler"
-#   zone   = var.zone_default
+#   zone   = var.zone
 #   target = google_compute_instance_group_manager.show_details_mig.id
 
 #   autoscaling_policy {
-#     max_replicas    = 2
-#     min_replicas    = 0
+#     max_replicas    = 7
+#     min_replicas    = 5
 #     cooldown_period = 15
 
 #     cpu_utilization {
@@ -51,7 +51,7 @@
 #   check_interval_sec  = 5
 #   timeout_sec         = 5
 #   healthy_threshold   = 2
-#   unhealthy_threshold = 10 # 50 seconds
+#   unhealthy_threshold = 10
 
 #   http_health_check {
 #     request_path = "/"

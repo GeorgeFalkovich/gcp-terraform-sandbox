@@ -32,7 +32,7 @@ variable "google_application_credentials" {
 variable "machine_type" {
   description = "Type of machine for GKE nodes"
   type        = string
-  default     = "e2-small"
+  default     = "n1-standard-1"
 }
 
 variable "nat_log_filter" {
