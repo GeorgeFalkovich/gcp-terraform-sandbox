@@ -1,62 +1,62 @@
-module "siege" {
+# module "stress_test_vm" {
+#   source           = "./modules/vm"
+#   instance_name    = "stress-test-vm"
+#   vpc_name         = var.vpc_name
+#   subnet_name      = var.vpc_subnet_name
+#   zone             = var.zone
+#   instance_type    = "n1-standard-1"
+#   assign_public_ip = false
+#   start_up_script  = file("./startup/stress-test-tools.sh")
+#   tags             = ["stress-test"]
+# }
+
+
+module "maintanance-server" {
   source           = "./modules/vm"
-  instance_name    = "siege"
-  vpc_name         = var.vpc_default
-  subnet_name      = var.vpc_subnet_default
-  zone             = var.zone_default
+  instance_name    = "maintanance-server"
+  vpc_name         = var.vpc_name
+  subnet_name      = var.vpc_subnet_name
+  zone             = var.zone
   assign_public_ip = true
-  start_up_script  = file("./startup/siege-install.sh")
-  tags             = ["siege"]
-  instance_image   = "ubuntu-2004-focal-v20240307b"
+  start_up_script  = file("./startup/maintenance.sh")
+  tags             = ["mongodb"]
+  enable_serial_port = true
+  desired_status   = "TERMINATED"
 }
 
-module "jenkins" {
-  source               = "./modules/vm"
-  instance_name        = "jenkins"
-  vpc_name             = var.vpc_default
-  subnet_name          = var.vpc_subnet_default
-  zone                 = var.zone_default
-  assign_public_ip     = true
-  start_up_script      = file("./startup/jenkins-install.sh")
-  tags                 = ["jenkins"]
-  instance_image       = "ubuntu-2004-focal-v20240307b"
-  instance_type        = "n2-standard-2"
-  access_config_nat_ip = google_compute_address.jenkins_ip.address
-  boot_disk_attached   = true
-  disk_source          = google_compute_disk.jenkins_disk.name
-  labels               = { app = "jenkins" }
-}
+# module "test-vm" {
+#   source           = "./modules/vm"
+#   instance_name    = "test-vm"
+#   vpc_name         = var.vpc_name
+#   subnet_name      = var.vpc_subnet_name
+#   zone             = var.zone
+#   assign_public_ip = true
+#   start_up_script  = file("./startup/maintenance.sh")
+#   tags             = ["test-vm"]
+#   enable_serial_port = true
+# }
 
-module "jenkins-agent" {
-  source               = "./modules/vm"
-  instance_name        = "jenkins-agent"
-  vpc_name             = var.vpc_default
-  subnet_name          = var.vpc_subnet_default
-  zone                 = var.zone_default
-  assign_public_ip     = true
-  access_config_nat_ip = google_compute_address.jenkins_agent_ip.address
-  start_up_script      = file("./startup/jenkins-agent-install.sh")
-  tags                 = ["jenkins-agent"]
-  instance_image       = "ubuntu-2004-focal-v20240307b"
-  instance_type        = "e2-medium"
-  boot_disk_attached   = false
-  labels               = { app = "jenkins-agent" }
-}
+# module "mongo-client" {
+#   source          = "./modules/vm"
+#   instance_name   = "mongo-client"
+#   vpc_name        = var.vpc_name
+#   subnet_name     = var.vpc_subnet_name
+#   zone            = var.zone
+#   external_ip     = true
+#   start_up_script = file("./startups/mongodb.sh")
+#   tags            = ["mongodb"]
+# }
 
-module "portfolio" {
-  source               = "./modules/vm"
-  instance_name        = "portfolio"
-  vpc_name             = var.vpc_default
-  subnet_name          = var.vpc_subnet_default
-  zone                 = var.zone_default
-  assign_public_ip     = true
-  start_up_script      = file("./startup/portfolio-install.sh")
-  tags                 = ["portfolio", "mysql"]
-  instance_image       = "ubuntu-2004-focal-v20240307b"
-  instance_type        = "e2-medium"
-  access_config_nat_ip = google_compute_address.portfolio_site_ip.address
-  boot_disk_attached   = true
-  disk_source          = google_compute_disk.portfolio_disk.name
-  labels               = { app = "portfolio" }
-  depends_on           = [google_compute_disk.portfolio_disk, google_compute_disk.portfolio_disk]
-}
+# resource "null_resource" "populate_mongo" {
+#   depends_on = [
+#     module.mongo
+#   ]
+#   provisioner "local-exec" {
+#     command = <<-EOF
+#     echo "starting mongo populate"
+#     sleep 60
+#     gcloud compute scp ./mongo_conf/populate_db.py root@mongo:/  --zone="${var.zone}"
+#     # gcloud compute ssh --zone="${var.zone}" mongo -- 'cd / && python3 populate_db.py'
+#     EOF
+#   }
+# }

@@ -80,3 +80,15 @@ variable "disk_source" {
   type    = string
   default = ""
 }
+
+variable "enable_serial_port" {
+  description = "Enable connecting to serial ports"
+  type        = bool
+  default     = false
+}
+
+variable "desired_status" {
+  description = "Desired status of the instance. Can be RUNNING or TERMINATED (stopped)"
+  type        = string
+  default     = "RUNNING"
+}

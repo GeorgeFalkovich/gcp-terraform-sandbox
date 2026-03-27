@@ -10,8 +10,9 @@ fi
 # Assign the first argument as the commit message
 COMMIT_MESSAGE="$1"
 
-# Run git commands
+# Run git commands excluding terraform.tfvars
 git add .
+git reset terraform.tfvars
 git commit -m "$COMMIT_MESSAGE"
 
 # Check if the commit was successful
